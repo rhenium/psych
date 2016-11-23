@@ -424,14 +424,12 @@ static VALUE alias(VALUE self, VALUE anchor)
     yaml_event_t event;
     TypedData_Get_Struct(self, yaml_emitter_t, &psych_emitter_type, emitter);
 
-    if(!NIL_P(anchor)) {
-	Check_Type(anchor, T_STRING);
-	anchor = rb_str_export_to_enc(anchor, rb_utf8_encoding());
-    }
+    Check_Type(anchor, T_STRING);
+    anchor = rb_str_export_to_enc(anchor, rb_utf8_encoding());
 
     yaml_alias_event_initialize(
 	    &event,
-	    (yaml_char_t *)(NIL_P(anchor) ? NULL : StringValueCStr(anchor))
+	    (yaml_char_t *)StringValueCStr(anchor)
 	    );
 
     emit(emitter, &event);
