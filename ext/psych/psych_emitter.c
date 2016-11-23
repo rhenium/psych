@@ -108,7 +108,6 @@ static VALUE start_stream(VALUE self, VALUE encoding)
     yaml_emitter_t * emitter;
     yaml_event_t event;
     TypedData_Get_Struct(self, yaml_emitter_t, &psych_emitter_type, emitter);
-    Check_Type(encoding, T_FIXNUM);
 
     yaml_stream_start_event_initialize(&event, (yaml_encoding_t)NUM2INT(encoding));
 
